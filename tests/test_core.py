@@ -11,7 +11,7 @@ import pytest
 from core.validator import DataValidator, ValidationStatus
 from core.kpi_utils import KPICalculator
 from core.unit_converter import UnitConverter
-from core.base_engine import BaseEngine, EngineResult
+from core.engine_core import BaseEngine, EngineResult
 from core.etl_orchestrator import ETLOrchestrator
 
 

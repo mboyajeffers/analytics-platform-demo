@@ -1,6 +1,6 @@
 # Analytics Platform Demo
 
-Architecture reference and core utilities from a production analytics platform covering **11 industry verticals**, **11 data source integrations**, and **500+ automated tests**.
+Architecture reference and core utilities from a production analytics platform covering **multiple industry verticals**, **multiple public data source integrations**, and **500+ automated tests**.
 
 This repo demonstrates the platform's architectural patterns and core abstractions — the engine design, data quality framework, KPI utilities, unit conversion system, and pipeline orchestrator. It is intended for technical evaluators and data partners who want to understand what's under the hood.
 
@@ -47,7 +47,7 @@ This repo demonstrates the platform's architectural patterns and core abstractio
 
 ## Industry Coverage
 
-11 verticals supported. Each vertical has its own engine with industry-specific KPIs, validation rules, and data source integrations.
+Multiple industry verticals are supported. Each vertical has its own engine with industry-specific KPIs, validation rules, and data source integrations.
 
 | Vertical | Key KPIs | Primary Data Sources |
 |----------|----------|---------------------|
@@ -67,14 +67,14 @@ This repo demonstrates the platform's architectural patterns and core abstractio
 
 ## Core Utilities
 
-These modules implement the platform's shared infrastructure. They are the same patterns used across all 11 verticals.
+These modules implement the platform's shared infrastructure. They are the same patterns used across all supported verticals.
 
-### `core/base_engine.py` — Abstract Industry Engine
+### `core/engine_core.py` — Abstract Industry Engine
 
 Abstract base class for all industry calculation engines. Implements the template method pattern: validate → load → normalize → compute → persist.
 
 ```python
-from core.base_engine import BaseEngine, EngineResult
+from core.engine_core import BaseEngine, EngineResult
 
 class FinanceEngine(BaseEngine):
     def compute_kpis(self) -> None:
@@ -96,7 +96,7 @@ Key design decisions:
 
 ### `core/validator.py` — Data Quality Framework
 
-Pre-flight validation before any engine processes data. Supports 11 engine types with type-specific column requirements.
+Pre-flight validation before any engine processes data. Supports each industry type with type-specific column requirements.
 
 ```python
 from core.validator import DataValidator, ValidationStatus
@@ -187,7 +187,7 @@ results = orch.run_all(job_date="2024-06-01")
 
 ## Data Sources
 
-11 public API integrations. Each uses the BaseExtractor pattern with rate limiting, caching, and retry-with-backoff built in.
+Multiple public API integrations. Each uses the BaseExtractor pattern with rate limiting, caching, and retry-with-backoff built in.
 
 | Source | Type | Auth | Rate Limit | Pagination |
 |--------|------|------|-----------|------------|
@@ -210,14 +210,14 @@ results = orch.run_all(job_date="2024-06-01")
 ```
 GCP Compute Engine (e2-highmem-2, 16GB RAM, 50GB SSD)
 ├── PostgreSQL — time-series bars, model registry, audit trail
-├── Flask API — 30+ endpoints across 11 verticals
+├── Flask API — 30+ endpoints across multiple verticals
 ├── Nginx — reverse proxy + SSL termination
 ├── systemd — 5 managed services with automatic restart
-│   ├── etl-orchestrator  — daily pipeline execution
-│   ├── intake-watcher    — file drop trigger
-│   ├── data-sync         — GCS backup sync
-│   ├── drive-sync        — Google Drive integration
-│   └── prospect-agent    — demo generation scheduler
+│   ├── job-orchestrator  — daily pipeline execution
+│   ├── file-intake-watcher    — file drop trigger
+│   ├── storage-sync       — GCS backup sync
+│   ├── cloud-drive-sync   — Google Drive integration
+│   └── report-scheduler   — demo generation scheduler
 ├── Cron — daily data fetch + weekly model retrain
 ├── GitHub Actions CI — lint, test, security scan, SBOM
 ├── Terraform — GCP resources (VM, storage, IAM, firewall)
@@ -240,7 +240,7 @@ GCP Compute Engine (e2-highmem-2, 16GB RAM, 50GB SSD)
 
 ```
 core/
-├── base_engine.py       # Abstract engine with KPI lifecycle management
+├── engine_core.py       # Abstract engine with KPI lifecycle management
 ├── validator.py         # Pre-flight data quality validation
 ├── kpi_utils.py         # Shared KPI calculation utilities
 ├── unit_converter.py    # Auto unit detection and normalisation

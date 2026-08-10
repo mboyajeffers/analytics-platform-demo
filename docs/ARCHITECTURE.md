@@ -6,7 +6,7 @@ Deep-dive into the design decisions, data flow, and infrastructure behind the pr
 
 ## Overview
 
-The platform is a multi-tenant analytics engine that extracts data from 11 public APIs, transforms it into industry-specific dimensional models, computes 100+ KPIs, and delivers branded intelligence reports. It runs on GCP with PostgreSQL, Flask, Nginx, and systemd-managed services.
+The platform is an analytics engine that extracts data from multiple public APIs, transforms it into industry-specific dimensional models, computes 100+ KPIs, and delivers branded intelligence reports. It runs on GCP with PostgreSQL, Flask, Nginx, and systemd-managed services.
 
 The architecture is structured around three concerns:
 

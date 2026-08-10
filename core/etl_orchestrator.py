@@ -32,7 +32,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Type
 
-from .base_engine import BaseEngine, EngineResult
+from .engine_core import BaseEngine, EngineResult
 
 
 logger = logging.getLogger("etl.orchestrator")

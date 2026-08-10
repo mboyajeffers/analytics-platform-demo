@@ -1,6 +1,6 @@
 # Industry Coverage
 
-11 verticals. Each has a dedicated engine, industry-specific KPIs, validated column requirements, and configured data sources.
+Multiple verticals. Each has a dedicated engine, industry-specific KPIs, validated column requirements, and configured data sources.
 
 ---
 

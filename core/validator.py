@@ -185,7 +185,7 @@ class DataValidator:
     """Pre-flight data quality validator.
 
     Runs engine-specific checks before any computation begins.
-    Supports all 11 industry engine types.
+    Supports each industry engine type.
 
     Usage::
 
