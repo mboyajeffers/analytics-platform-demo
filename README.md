@@ -1,3 +1,5 @@
+> **Archived — consolidated into [Data-Engineering-Portfolio](https://github.com/mboyajeffers/Data-Engineering-Portfolio/tree/main/pipelines/etl_framework).** The `pipelines/etl_framework/` directory there covers the same architecture patterns with production extractors, not just demo abstractions. This repo is kept for history only.
+
 # Analytics Platform Demo
 
 Architecture reference and core utilities from a production analytics platform covering **multiple industry verticals**, **multiple public data source integrations**, and **500+ automated tests**.
